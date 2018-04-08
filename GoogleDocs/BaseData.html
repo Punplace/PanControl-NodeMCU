@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  
+  <?!= Include('_Head'); ?>
+  <body>
+    
+    <div class="container">
+      <div class="nrs_stack">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">卡片類別</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">進駐團隊</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">機器</a>
+          </div>
+        </nav>
+        
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show m-4 active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+			<form action="<?= actionUrl ?>" method="post" target="_blank">
+				<input type="hidden" name="TableName" value="CardType" />
+				<div class="form-group">
+					<label>卡片類別名稱</label>
+					<input class="form-control" type="text" name="Name" placeholder="請填入卡片類別名稱" required/>
+				</div>
+				
+                <button type="submit" class="btn btn-primary">送出</button>
+			</form>
+		  </div>
+          
+          <div class="tab-pane fade m-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <form action="<?= actionUrl ?>" method="post" target="_blank">
+				<input type="hidden" name="TableName" value="Team" />
+				<div class="form-group">
+					<label>進駐團隊名稱</label>
+					<input class="form-control" type="text" name="Name" placeholder="請填入進駐團隊名稱" required/>
+				</div>
+                <div class="form-check form-group">
+                  <input class="form-check-input" type="checkbox" name="IsActive" id="checkkk" checked>
+                  <label class="form-check-label" for="checkkk">
+                    進駐中
+                  </label>
+                </div>
+				
+				<button type="submit" class="btn btn-primary">送出</button>
+			</form>
+          </div>
+          
+          <div class="tab-pane fade m-4" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <form action="<?= actionUrl ?>" method="post" target="_blank">
+				<input type="hidden" name="TableName" value="Machine" />
+				<div class="form-group">
+					<label>機器名稱</label>
+					<input class="form-control" type="text" name="Name" placeholder="請填入機器名稱" required/>
+				</div>
+                <div class="form-group">
+					<label>收費費用</label>
+					<input class="form-control" type="number" name="Charge" placeholder="(單位: 元/半小時)" required/>
+				</div>
+				
+				<button type="submit" class="btn btn-primary">送出</button>
+			</form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </body>
+  
+  
+  <script>
+    
+  </script>
+    
+</html>

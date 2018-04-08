@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  
+  <?!= Include('_Head'); ?>
+  <body>
+    
+    <div class="container">
+        <form action="<?= actionUrl ?>" method="post" target="_blank">
+            <input type="hidden" name="TableName" value="Record" />
+            
+            <div class="form-group">
+                <label>卡號</label>
+                <? var cardData = getCardData(); ?>
+                <select class="form-control" name="CardID">
+                    <? for (var i = 0; i < cardData.length; i++) { ?>
+                    <option value="<?= cardData[i][0] ?>">
+                        <?= cardData[i][1] ?>
+                    </option>
+                    <? } ?>
+                </select>
+            </div>
+            <div class="form-group"> 
+                <label>機器</label>
+                <? var machineData = getMachineData(); ?>
+                <select class="form-control" name="MachineID">
+                    <? for (var i = 0; i < machineData.length; i++) { ?>
+                    <option value="<?= machineData[i][0] ?>">
+                        <?= machineData[i][1] ?>
+                    </option>
+                    <? } ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn" type="button" onclick="Start()">開始</button>
+                <input id="StartTime" name="StartTime" hidden />
+            </div>
+            <div class="form-group">
+                <button class="btn" type="submit" onclick="End()">結束</button>
+                <input id="EndTime" name="EndTime" hidden />
+            </div>
+        </form>
+    </div>
+    
+  </body>
+  
+  
+  <script>
+    function Start(){
+      
+      $("#StartTime").val(new Date().toLocaleString());
+    }
+    function End(){
+      $("#EndTime").val(new Date().toLocaleString());
+    }
+  </script>
+    
+</html>
