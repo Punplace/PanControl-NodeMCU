@@ -13,8 +13,10 @@
 
 ### simple trubleshooting
 #### Arduino IDE
-* Can't access: /dev/tty
-[stackoverflow](https://askubuntu.com/questions/210177/serial-port-terminal-cannot-open-dev-ttys0-permission-denied?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
-* Serial Monitor mojibake texts
-Make sure you choose the currect speed of data transmission
+Can't access: /dev/tty
 
+:   [stackoverflow](https://askubuntu.com/questions/210177/serial-port-terminal-cannot-open-dev-ttys0-permission-denied?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
+
+Serial Monitor mojibake texts
+
+:   Make sure you choose the currect speed of data transmission
