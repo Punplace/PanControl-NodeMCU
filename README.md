@@ -9,3 +9,4 @@
     2. In `Tools > Board: > Boards manager...` choose type to `Contributed` find `esp8266 by ESP8266 Community` and install it.
 3. Select `Tools > Board:` to NodeMCU
 4. Select the correct Port for your NodeMCU
+5. Find a example in `File > Examples > NodeMCU`. And try to burn it.
