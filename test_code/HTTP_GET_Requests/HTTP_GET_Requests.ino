@@ -2,14 +2,12 @@
 
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
- 
-const char* ssid = "louisguan";
-const char* password = "0989839679";
+#include "CUSTOM_SETTING.h"
  
 void setup () {
  
   Serial.begin(115200);
-  WiFi.begin(ssid, password);
+  WiFi.begin(my_wifi_ssid, my_wifi_password);
  
   while (WiFi.status() != WL_CONNECTED) {
  
