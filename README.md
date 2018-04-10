@@ -11,8 +11,11 @@
 4. Select the correct Port for your NodeMCU
 5. Find a example in `File > Examples > NodeMCU`. And try to burn it.
 
-### simple trubleshooting
-#### Arduino IDE
+## custom setting
+1. copy `CUSTOM_SETTING_example.h` as `CUSTOM_SETTING.h` to the directory where your `.ino` is.
+
+## simple trubleshooting
+### Arduino IDE
 ##### Can't access: /dev/tty
 [stackoverflow](https://askubuntu.com/questions/210177/serial-port-terminal-cannot-open-dev-ttys0-permission-denied?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
 ##### Serial Monitor mojibake texts
