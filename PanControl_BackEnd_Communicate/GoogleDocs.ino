@@ -7,17 +7,19 @@
 #include "DebugMacros.h"
 #include "CUSTOM_SETTING.h"
 
-class GoogleDocs_Communicate : public HTTPSRedirect
+class PanControl_BackEnd_Communicate : public HTTPSRedirect
 {
     private:
-        // Write to Google Spreadsheet
-        String url = String("/macros/s/") + GScriptId + "/dev?value=Hello";
-        // Fetch Google Calendar events for 1 week ahead
-        String url2 = String("/macros/s/") + GScriptId + "/exec?cal";
-        // Read from Google Spreadsheet
-        String url3 = String("/macros/s/") + GScriptId + "/exec?read";
-        String payload_base =  "{\"command\": \"appendRow\", \"sheet_name\": \"Sheet1\", \"values\": ";
-        String payload = "";
+        char * _host;
+        char * _fingerprint;
+    public:
+        PanControl_BackEnd_Communicate(void);
+}
+
+PanControl_BackEnd_Communicate::PanControl_BackEnd_Communicate(void):
+HTTPSRedirect(void)
+{
+
 }
 
 void setup()
