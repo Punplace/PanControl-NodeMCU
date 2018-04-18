@@ -11,7 +11,7 @@
 */
 
 #include <ESP8266WiFi.h>
-#include "HTTPSRedirect.h"
+#include "HTTPSRedirect.hpp"
 #include "DebugMacros.h"
 
 // for stack analytics
