@@ -14,6 +14,7 @@ class PanControl_BackEnd_Communicate : public HTTPSRedirect
         const char * _fingerprint;
         void _PanC_initial(void);
         String _url_path;
+        String _do_get_data(const String& get_url);
 
     public:
         //constructor
@@ -70,38 +71,52 @@ bool PanControl_BackEnd_Communicate::verify(void)
 {
     return verify(_fingerprint, _remote_host);
 }
-String PanControl_BackEnd_Communicate::Get_whole_table(const String& table_name)
+String PanControl_BackEnd_Communicate::_do_get_data(const String& get_url)
 {
-    if(GET(_url_path + "TableName=" + table_name, _remote_host))
+    if(GET(get_url, _remote_host))
         return getResponseBody();
     else
         return String("");
+}
+String PanControl_BackEnd_Communicate::Get_whole_table(const String& table_name)
+{
+    return _do_get_data(_url_path + "TableName=" + table_name);
 }
 String PanControl_BackEnd_Communicate::Get_if_CardID_active(const String& CardID)
 {
-    if(GET(_url_path + "TableName=CardInfo&CardNumber=" + CardID, _remote_host))
-        return getResponseBody();
-    else
-        return String("");
+    return _do_get_data(_url_path + "TableName=CardInfo&CardNumber=" + CardID);
 }
 String PanControl_BackEnd_Communicate::Get_the_CardID_reserve_data(const String& CardID)
 {
-    if(GET(_url_path + "TableName=Reservation&CardNumber=" + CardID, _remote_host))
-        return getResponseBody();
-    else
-        return String("");
+    return _do_get_data(_url_path + "TableName=Reservation&CardNumber=" + CardID);
+}
+
+extern "C"
+{
+    #include <cont.h>
+    extern cont_t g_cont;
 }
 
 void setup()
 {
     Serial.begin(115200);
     Serial.flush();
+
+    // stack & heap analysis
+    Serial.println(String("(in setup())Free heap  : ") + ESP.getFreeHeap());
+    Serial.println(String("(in setup())Free stack : ") + cont_get_free_stack(&g_cont));
+
+    // set wifi
     WiFi.mode(WIFI_STA);
     WiFi.begin(my_wifi_ssid, my_wifi_password);
 }
 
 void loop()
 {
+    // stack & heap analysis
+    Serial.println(String("(loop top)Free heap  : ") + ESP.getFreeHeap());
+    Serial.println(String("(loop top)Free stack : ") + cont_get_free_stack(&g_cont));
+
 ////////////////////// check if WIFI still connected //////////////////////
     while(WiFi.status() != WL_CONNECTED) 
     {
@@ -126,6 +141,16 @@ void loop()
     Serial.print(response_body);
     response_body = client->Get_the_CardID_reserve_data(String("0000000002"));
     Serial.print(response_body);
+
+    // stack & heap analysis
+    Serial.println(String("(before delete)Free heap  : ") + ESP.getFreeHeap());
+    Serial.println(String("(before delete)Free stack : ") + cont_get_free_stack(&g_cont));
+
     delete client;
+    client = nullptr;
+
+    // stack & heap analysis
+    Serial.println(String("(after delete)Free heap  : ") + ESP.getFreeHeap());
+    Serial.println(String("(after delete)Free stack : ") + cont_get_free_stack(&g_cont));
 }
 
