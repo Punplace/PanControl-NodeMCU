@@ -1,5 +1,5 @@
 # PanControl
-卡片電力控制系統
+NodeMCU part of PanControl
 
 ## develope
 ### environment
@@ -21,6 +21,8 @@
 ##### Serial Monitor mojibake texts
 Make sure you choose the currect speed of data transmission
 
+## library usage
 
 ## reference
-https://github.com/electronicsguy/ESP8266/tree/master/HTTPSRedirect
+[HTTPSRedirect](https://github.com/electronicsguy/ESP8266/tree/master/HTTPSRedirect)
+[Arduino ESP8266/ESP32 Exception Stack Trace Decoder](https://github.com/me-no-dev/EspExceptionDecoder)
