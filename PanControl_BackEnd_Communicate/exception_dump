@@ -1,0 +1,28 @@
+0x4021a262: more_comps at crypto/bigint.c line 1072
+0x4021a45c: alloc at crypto/bigint.c line 1106
+0x40100670: realloc at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/cores/esp8266/umm_malloc/umm_malloc.c line 1641
+0x4021a775: regular_multiply at crypto/bigint.c line 822
+0x402057b4: optimistic_yield(uint32_t) at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/cores/esp8266/core_esp8266_main.cpp line 111
+0x4021b2af: bi_barrett at crypto/bigint.c line 1289
+0x4021b504: bi_mod_power at crypto/bigint.c line 1414
+0x4021a308: trim at crypto/bigint.c line 1197
+0x4021c68d: RSA_encrypt at crypto/rsa.c line 254
+0x40217388: send_client_key_xchg at ssl/tls1_clnt.c line 409
+0x4021781d: do_clnt_handshake at ssl/tls1_clnt.c line 123
+0x402148e0: mem_free at core/mem.c line 152
+0x40210445: pbuf_free_LWIP2 at core/pbuf.c line 777
+0x40203f64: ClientContext::read(char*, unsigned int) at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/libraries/ESP8266WiFi/src/include/ClientContext.h line 494
+0x40205774: __yield() at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/cores/esp8266/core_esp8266_main.cpp line 96
+0x40217190: basic_read at ssl/tls1.c line 1607
+0x4021756c: do_client_connect at ssl/tls1_clnt.c line 168
+0x401004d8: malloc at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/cores/esp8266/umm_malloc/umm_malloc.c line 1668
+0x40203d18: SSLContext::_delete_shared_SSL(SSL_*) at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/libraries/ESP8266WiFi/src/WiFiClientSecure.cpp line 115
+0x402172f8: ssl_read at ssl/tls1.c line 314
+0x40204701: SSLContext::connect(ClientContext*, char const*, unsigned int) at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/libraries/ESP8266WiFi/src/WiFiClientSecure.cpp line 146
+0x4020560c: operator new(unsigned int) at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/cores/esp8266/abi.cpp line 30
+0x40204740: std::__shared_ptr ::operator=(std::__shared_ptr &&) at /home/wildfoot-vm/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/1.20.0-26-gb404fb9-2/xtensa-lx106-elf/include/c++/4.8.2/bits/shared_ptr_base.h line 862
+0x4020494f: WiFiClientSecure::_connectSSL(char const*) at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/libraries/ESP8266WiFi/src/WiFiClientSecure.cpp line 350
+0x402049f5: WiFiClientSecure::connect(char const*, unsigned short) at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/libraries/ESP8266WiFi/src/WiFiClientSecure.cpp line 518
+0x40205964: PanControl_BackEnd_Communicate::connect(int) at /home/wildfoot-vm/workplace/My-Git/PanControl-NodeMCU/PanControl_BackEnd_Communicate/PanControl_BackEnd_Communicate.ino line 65
+0x40202c4c: loop() at /home/wildfoot-vm/workplace/My-Git/PanControl-NodeMCU/PanControl_BackEnd_Communicate/PanControl_BackEnd_Communicate.ino line 136
+0x40205748: loop_wrapper() at /home/wildfoot-vm/.arduino15/packages/esp8266/hardware/esp8266/2.4.1/cores/esp8266/core_esp8266_main.cpp line 121
