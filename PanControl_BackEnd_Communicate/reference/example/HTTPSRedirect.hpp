@@ -16,7 +16,6 @@
 
 class HTTPSRedirect : public WiFiClientSecure {
   private:
-    const int _httpsPort;
     bool _keepAlive;
     String _redirUrl;
     String _redirHost;
@@ -61,8 +60,10 @@ class HTTPSRedirect : public WiFiClientSecure {
     void printHeaderFields(void);
 #endif
 
-  public:
+  protected:
+    const int _httpsPort;
 
+  public:
     HTTPSRedirect(void);
     HTTPSRedirect(const int);
     ~HTTPSRedirect();
@@ -86,9 +87,7 @@ class HTTPSRedirect : public WiFiClientSecure {
 
 };
 
-HTTPSRedirect::HTTPSRedirect(void): 
-_httpsPort(443)
-{
+HTTPSRedirect::HTTPSRedirect(void) : _httpsPort(443){
   Init();
 }
 
@@ -229,6 +228,7 @@ void HTTPSRedirect::createPostRequest(const String& url, const char* host, const
                           payload +
                           "\r\n\r\n";
 
+  Serial.println(_Request);
   return;
 }
 

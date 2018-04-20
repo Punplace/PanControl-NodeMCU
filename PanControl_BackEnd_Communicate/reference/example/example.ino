@@ -1,14 +1,12 @@
-//https://docs.google.com/spreadsheets/d/1j5UX_r9JBG_qLsKYpLnlgqdZgXSkF1VC8L_mt7iAhgI/edit#gid=0
-
 /*  HTTPS on ESP8266 with follow redirects, chunked encoding support
-    Version 2.1
-    Author: Sujay Phadke
-    Github: @electronicsguy
-    Copyright (C) 2017 Sujay Phadke <electronicsguy123@gmail.com>
-    All rights reserved.
-
-    Example Arduino program
-*/
+ *  Version 2.1
+ *  Author: Sujay Phadke
+ *  Github: @electronicsguy
+ *  Copyright (C) 2017 Sujay Phadke <electronicsguy123@gmail.com>
+ *  All rights reserved.
+ *
+ *  Example Arduino program
+ */
 
 #include <ESP8266WiFi.h>
 #include "HTTPSRedirect.hpp"
@@ -26,6 +24,7 @@ const char* password = "40666888";
 
 const char* host = "script.google.com";
 // Replace with your own script id to make server side changes
+//const char *GScriptId = "AKfycbzYw5G-oxvnwHpAJfDsS0PWNrO0KTBMiCW78lHUcEO6ZnFHvSw";
 const char *GScriptId = "AKfycbz46PadqPv4C4F91evN9LaR8evKg-iOgn5VzoNHdFM";
 
 const int httpsPort = 443;
@@ -34,7 +33,7 @@ const int httpsPort = 443;
 const char* fingerprint = "";
 
 // Write to Google Spreadsheet
-String url = String("/macros/s/") + GScriptId + "/dev?value=Hello";
+String url = String("/macros/s/") + GScriptId + "/exec?value=Hello";
 // Fetch Google Calendar events for 1 week ahead
 String url2 = String("/macros/s/") + GScriptId + "/exec?cal";
 // Read from Google Spreadsheet
@@ -56,16 +55,16 @@ unsigned int free_stack_before = 0;
 void setup() {
   Serial.begin(115200);
   Serial.flush();
-
+  
   free_heap_before = ESP.getFreeHeap();
   free_stack_before = cont_get_free_stack(&g_cont);
   Serial.printf("Free heap before: %u\n", free_heap_before);
   Serial.printf("unmodified stack   = %4d\n", free_stack_before);
-
+  
   Serial.println();
   Serial.print("Connecting to wifi: ");
   Serial.println(ssid);
-  // flush() is needed to print the above (connecting...) message reliably,
+  // flush() is needed to print the above (connecting...) message reliably, 
   // in case the wireless connection doesn't go through
   Serial.flush();
 
@@ -83,29 +82,29 @@ void setup() {
   client = new HTTPSRedirect(httpsPort);
   client->setPrintResponseBody(true);
   client->setContentTypeHeader("application/json");
-
+  
   Serial.print("Connecting to ");
   Serial.println(host);
 
   // Try to connect for a maximum of 5 times
   bool flag = false;
-  for (int i = 0; i < 5; i++) {
+  for (int i=0; i<5; i++){
     int retval = client->connect(host, httpsPort);
     if (retval == 1) {
-      flag = true;
-      break;
+       flag = true;
+       break;
     }
     else
       Serial.println("Connection failed. Retrying...");
   }
 
-  if (!flag) {
+  if (!flag){
     Serial.print("Could not connect to server: ");
     Serial.println(host);
     Serial.println("Exiting...");
     return;
   }
-
+  
   if (client->verify(fingerprint, host)) {
     Serial.println("Certificate match.");
   } else {
@@ -117,11 +116,11 @@ void setup() {
   client->POST(url2, host, payload, false);
   payload = payload_base + "\"" + ESP.getFreeHeap() + "," + cont_get_free_stack(&g_cont) + "\"}";
   client->POST(url2, host, payload, false);
-
+  
   // Note: setup() must finish within approx. 1s, or the the watchdog timer
   // will reset the chip. Hence don't put too many requests in setup()
   // ref: https://github.com/esp8266/Arduino/issues/34
-
+  
   Serial.println("\nGET: Write into cell 'A1'");
   Serial.println("=========================");
 
@@ -131,7 +130,7 @@ void setup() {
   // Send memory data to Google Sheets
   payload = payload_base + "\"" + ESP.getFreeHeap() + "," + cont_get_free_stack(&g_cont) + "\"}";
   client->POST(url2, host, payload, false);
-
+  
   Serial.println("\nGET: Fetch Google Calendar Data:");
   Serial.println("================================");
 
@@ -141,12 +140,12 @@ void setup() {
   // Send memory data to Google Sheets
   payload = payload_base + "\"" + ESP.getFreeHeap() + "," + cont_get_free_stack(&g_cont) + "\"}";
   client->POST(url2, host, payload, false);
-
-//  Serial.println("\nSeries of GET and POST requests");
-//  Serial.println("===============================");
-
-//  Serial.printf("Free heap: %u\n", ESP.getFreeHeap());
-//  Serial.printf("unmodified stack   = %4d\n", cont_get_free_stack(&g_cont));
+  
+  Serial.println("\nSeries of GET and POST requests");
+  Serial.println("===============================");
+  
+  Serial.printf("Free heap: %u\n", ESP.getFreeHeap());
+  Serial.printf("unmodified stack   = %4d\n", cont_get_free_stack(&g_cont));
 
   // delete HTTPSRedirect object
   delete client;
@@ -160,8 +159,8 @@ void loop() {
   static bool flag = false;
   //Serial.printf("Free heap: %u\n", ESP.getFreeHeap());
   //Serial.printf("unmodified stack   = %4d\n", cont_get_free_stack(&g_cont));
-
-  if (!flag) {
+  
+  if (!flag){
     free_heap_before = ESP.getFreeHeap();
     free_stack_before = cont_get_free_stack(&g_cont);
     client = new HTTPSRedirect(httpsPort);
@@ -170,19 +169,19 @@ void loop() {
     client->setContentTypeHeader("application/json");
   }
 
-  if (client != nullptr) {
-    if (!client->connected()) {
+  if (client != nullptr){
+    if (!client->connected()){
       client->connect(host, httpsPort);
       payload = payload_base + "\"" + free_heap_before + "," + free_stack_before + "\"}";
       client->POST(url2, host, payload, false);
     }
   }
-  else {
+  else{
     DPRINTLN("Error creating client object!");
     error_count = 5;
   }
-
-  if (connect_count > MAX_CONNECT) {
+  
+  if (connect_count > MAX_CONNECT){
     //error_count = 5;
     connect_count = 0;
     flag = false;
@@ -190,8 +189,50 @@ void loop() {
     return;
   }
 
-  Serial.println("hahaha");
-  client->GET(url, host);
-  delay(60000);
+  Serial.println("GET Data from cell 'A1':");
+  if (client->GET(url3, host)){
+    ++connect_count;
+  }
+  else{
+    ++error_count;
+    DPRINT("Error-count while connecting: ");
+    DPRINTLN(error_count);
+  }
+
+  Serial.println("POST append memory data to spreadsheet:");
+  payload = payload_base + "\"" + ESP.getFreeHeap() + "," + cont_get_free_stack(&g_cont) + "\"}";
+  if(client->POST(url2, host, payload)){
+    ;
+  }
+  else{
+    ++error_count;
+    DPRINT("Error-count while connecting: ");
+    DPRINTLN(error_count);
+  }
+
+  /*
+  if (!(client.reConnectFinalEndpoint())){
+    ++error_count;
+    DPRINT("Error-count while connecting: ");
+    DPRINTLN(error_count);
+  }
+  else
+    error_count = 0;
+  */
+  
+  if (error_count > 3){
+    Serial.println("Halting processor..."); 
+    delete client;
+    client = nullptr;
+    Serial.printf("Final free heap: %u\n", ESP.getFreeHeap());
+    Serial.printf("Final unmodified stack   = %4d\n", cont_get_free_stack(&g_cont));
+    Serial.flush();
+    ESP.deepSleep(0);
+  }
+  
+  // In my testing on a ESP-01, a delay of less than 1500 resulted 
+  // in a crash and reboot after about 50 loop runs.
+  delay(4000);
+                          
 }
 
