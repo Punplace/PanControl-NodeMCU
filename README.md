@@ -22,6 +22,7 @@ NodeMCU part of PanControl
 Make sure you choose the currect speed of data transmission
 
 ## library usage
+[PanControl BackEnd Communicate](https://github.com/Punplace/PanControl-NodeMCU/blob/master/main/library/PanControl_BackEnd_Communicate/README.md)
 
 ## reference
 * [HTTPSRedirect](https://github.com/electronicsguy/ESP8266/tree/master/HTTPSRedirect)
