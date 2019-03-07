@@ -8,6 +8,8 @@
 #include "DebugMacros.h"
 #include "CUSTOM_SETTING.hpp"
 
+#ifndef PC_BEC_HPP
+#define PC_BEC_HPP
 class PanControl_BackEnd_Communicate : public HTTPSRedirect
 {
     private:
@@ -122,6 +124,7 @@ String PanControl_BackEnd_Communicate::Post_save_Team(const String& Name)
 {
     return _do_post_data("TableName=Team&Name=" + Name);
 }
+#endif  // PC_BEC_HPP
 
 extern "C"
 {

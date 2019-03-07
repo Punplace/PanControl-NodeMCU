@@ -1,6 +1,6 @@
 // For PanControl communicate between IoT and Google apps script
 // Version 1.0
-// https://github.com/Wildfoot
+// https://github.com/WildfootW
 // Copyright (C) 2018 WildfootW
 // All rights reserved
 //
@@ -10,6 +10,8 @@
 #include "HTTPSRedirect.hpp"
 #include "DebugMacros.h"
 
+#ifndef PC_BEC_HPP
+#define PC_BEC_HPP
 class PanControl_BackEnd_Communicate : public HTTPSRedirect
 {
     private:
@@ -124,3 +126,4 @@ String PanControl_BackEnd_Communicate::Post_save_Team(const String& Name)
 {
     return _do_post_data("TableName=Team&Name=" + Name);
 }
+#endif //PC_BEC_HPP
